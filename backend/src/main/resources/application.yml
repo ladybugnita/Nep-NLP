@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: nepnlp-backend
+  data:
+    mongodb:
+      uri: ${SPRING_DATA_MONGODB_URI:mongodb://localhost:27017/nepnlp}
+      auto-index-creation: true
+
+nepnlp:
+  ml:
+    base-url: ${NEPNLP_ML_BASE_URL:http://localhost:8000}
+  cors:
+    allowed-origins: http://localhost:5173,http://localhost:4173,http://localhost
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

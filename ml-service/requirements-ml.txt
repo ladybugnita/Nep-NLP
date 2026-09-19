@@ -1,0 +1,12 @@
+# Heavy ML stack for the transformer tier (fine-tuning + inference) and translation.
+# Install on Colab (GPU) for training, or in an "ML-enabled" build of this service.
+#   pip install -r requirements.txt -r requirements-ml.txt
+-r requirements.txt
+torch>=2.2
+transformers>=4.44
+datasets>=2.20
+sentencepiece>=0.2
+accelerate>=0.33
+evaluate>=0.4
+scipy>=1.13
+pandas>=2.2
