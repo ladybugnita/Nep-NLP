@@ -49,7 +49,11 @@ _KEEP_RE = re.compile(rf"[^{_DEVANAGARI_BLOCK}A-Za-z0-9\s।॥?!.,;:%\-]")
 
 _SENT_SPLIT_RE = re.compile(r"[।॥?!]+|(?<!\d)\.(?!\d)")
 
-_TOKEN_RE = re.compile(rf"[{_DEVANAGARI_BLOCK}A-Za-z0-9]+")
+# Word tokens: Devanagari LETTERS/matras only (U+0900–U+0963, U+0971–U+097F) plus ASCII
+# letters/digits. Deliberately excludes danda (।), double danda (॥) and Devanagari digits
+# so punctuation is never treated as a word (which would be flagged as a misspelling).
+_DEV_LETTERS = r"ऀ-ॣॱ-ॿ"  # Devanagari letters/matras (no danda/digits)
+_TOKEN_RE = re.compile(rf"[{_DEV_LETTERS}A-Za-z0-9]+")
 
 def normalize_unicode(text: str) -> str:
     """Canonical composition (NFC) so equivalent forms become identical."""

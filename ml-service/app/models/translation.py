@@ -22,8 +22,9 @@ class TranslationModel:
     def __init__(self) -> None:
         self.tier = "unavailable"
         self.model_name = ""
-        self._pipe_cache: dict[tuple[str, str], object] = {}
         self._model_source: str | None = None
+        self._tok = None
+        self._model = None
 
     def load(self) -> "TranslationModel":
         if (config.TRANSLATION_MODEL_DIR / "config.json").exists():
@@ -42,19 +43,23 @@ class TranslationModel:
     def ready(self) -> bool:
         return self.tier != "unavailable"
 
-    def _get_pipe(self, src: str, tgt: str):
-        key = (src, tgt)
-        if key not in self._pipe_cache:
-            from transformers import pipeline  
+    def _ensure_loaded(self) -> None:
+        # Lazily load tokenizer + model on first use. We call the model directly rather than
+        # pipeline("translation"), which newer transformers versions no longer register.
+        if self._model is None:
+            from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-            self._pipe_cache[key] = pipeline(
-                "translation",
-                model=self._model_source,
-                src_lang=_LANG_CODE[src],
-                tgt_lang=_LANG_CODE[tgt],
-                max_length=512,
-            )
-        return self._pipe_cache[key]
+            self._tok = AutoTokenizer.from_pretrained(self._model_source)
+            self._model = AutoModelForSeq2SeqLM.from_pretrained(self._model_source)
+            self._model.eval()
+
+    def _target_bos_id(self, target_code: str) -> int:
+        tok = self._tok
+        tid = tok.convert_tokens_to_ids(target_code)
+        unk = getattr(tok, "unk_token_id", None)
+        if tid is None or tid == unk:  # older NLLB tokenizers expose a lookup map instead
+            tid = getattr(tok, "lang_code_to_id", {}).get(target_code)
+        return tid
 
     def translate(self, text: str, source: str, target: str) -> TranslationResponse:
         if source not in _LANG_CODE or target not in _LANG_CODE or source == target:
@@ -72,12 +77,24 @@ class TranslationModel:
                 ),
             )
         try:
-            out = self._get_pipe(source, target)(clean(text))[0]["translation_text"]
+            import torch
+
+            self._ensure_loaded()
+            self._tok.src_lang = _LANG_CODE[source]
+            enc = self._tok(clean(text), return_tensors="pt", truncation=True, max_length=512)
+            with torch.no_grad():
+                gen = self._model.generate(
+                    **enc,
+                    forced_bos_token_id=self._target_bos_id(_LANG_CODE[target]),
+                    max_new_tokens=256,
+                    num_beams=1,  # greedy: fast enough on CPU
+                )
+            out = self._tok.batch_decode(gen, skip_special_tokens=True)[0].strip()
             return TranslationResponse(
                 translation=out, source=source, target=target, model=self.model_name,
                 available=True,
             )
-        except Exception as exc:  
+        except Exception as exc:
             return TranslationResponse(
                 translation="", source=source, target=target, model=self.model_name,
                 available=False, detail=f"Inference error: {exc}",

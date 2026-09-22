@@ -29,6 +29,11 @@ frontend/.vite/
 data/raw/
 ml-service/data/raw/
 *.jsonl.gz
+# Derived training file that embeds scraped article text (re-generate from the scraper).
+ml-service/data/news_train_full.csv
+# Gold-set pool + generated labelling tool embed scraped text (re-generate as needed).
+ml-service/data/gold/
+ml-service/tools/label_news.html
 
 # ---- Env / secrets ----
 .env

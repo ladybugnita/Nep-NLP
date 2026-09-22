@@ -137,15 +137,19 @@ def train_transformer(task, texts, labels, base_model, epochs, batch_size,
         seed=seed,
     )
 
-    trainer = Trainer(
+    trainer_kwargs = dict(
         model=model,
         args=args,
         train_dataset=ds_tr,
         eval_dataset=ds_te,
-        tokenizer=tok,
         data_collator=DataCollatorWithPadding(tok),
         compute_metrics=compute_metrics,
     )
+    # transformers >=4.46 renamed `tokenizer` -> `processing_class`; support both.
+    try:
+        trainer = Trainer(**trainer_kwargs, processing_class=tok)
+    except TypeError:
+        trainer = Trainer(**trainer_kwargs, tokenizer=tok)
     trainer.train()
 
     preds = np.argmax(trainer.predict(ds_te).predictions, axis=-1)

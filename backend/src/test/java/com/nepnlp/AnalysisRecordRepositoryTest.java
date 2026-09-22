@@ -2,8 +2,11 @@ package com.nepnlp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nepnlp.dto.FeedbackRequest;
 import com.nepnlp.model.AnalysisRecord;
 import com.nepnlp.repository.AnalysisRecordRepository;
+import com.nepnlp.service.NlpService;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
@@ -47,5 +50,21 @@ class AnalysisRecordRepositoryTest {
         assertThat(repo.findByToolOrderByCreatedAtDesc("sentiment", PageRequest.of(0, 10)))
                 .singleElement()
                 .satisfies(r -> assertThat(r.getInput()).isEqualTo("ख"));
+    }
+
+    @Test
+    void feedbackUpdatesStoredRecord() {
+        // The feedback loop: a stored prediction gets a user correction written back to it.
+        repo.deleteAll();
+        AnalysisRecord saved = repo.save(new AnalysisRecord(
+                "news", "नेपालले खेल जित्यो।", Map.of("label", "राजनीति"), "baseline"));
+
+        // ml client is not used by addFeedback, so null is fine here.
+        NlpService service = new NlpService(null, repo, new ObjectMapper());
+        service.addFeedback(new FeedbackRequest(saved.getId(), "खेलकुद", false));
+
+        AnalysisRecord after = repo.findById(saved.getId()).orElseThrow();
+        assertThat(after.getCorrectLabel()).isEqualTo("खेलकुद");
+        assertThat(after.getModelWasCorrect()).isFalse();
     }
 }

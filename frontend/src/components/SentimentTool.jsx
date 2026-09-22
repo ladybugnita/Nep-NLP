@@ -3,6 +3,7 @@ import { api } from '../api'
 import { examples } from '../data/examples'
 import InputPanel from './InputPanel'
 import ScoreBars from './ScoreBars'
+import Feedback from './Feedback'
 
 const STYLE = {
   'सकारात्मक': { emoji: '😊', cls: 'pos', en: 'Positive' },
@@ -48,6 +49,19 @@ export default function SentimentTool() {
             <span className={`tier tier-${result.model}`}>{result.model}</span>
           </div>
           <ScoreBars scores={result.scores} />
+          {result.highlights?.length > 0 && (
+            <div className="highlights">
+              <span className="sub">Why: words that signalled sentiment —</span>
+              {result.highlights.map((h, i) => (
+                <span key={i} className={`hl ${h.polarity}`}>{h.word}</span>
+              ))}
+            </div>
+          )}
+          <Feedback
+            recordId={result.recordId}
+            labels={result.scores.map((x) => x.label)}
+            currentLabel={result.label}
+          />
         </div>
       )}
     </div>

@@ -3,6 +3,7 @@ import { api } from '../api'
 import { examples } from '../data/examples'
 import InputPanel from './InputPanel'
 import ScoreBars from './ScoreBars'
+import Feedback from './Feedback'
 
 export default function NewsTool() {
   const [text, setText] = useState('')
@@ -36,6 +37,11 @@ export default function NewsTool() {
             <span className={`tier tier-${result.model}`}>{result.model}</span>
           </div>
           <ScoreBars scores={result.scores} />
+          <Feedback
+            recordId={result.recordId}
+            labels={result.scores.map((x) => x.label)}
+            currentLabel={result.label}
+          />
         </div>
       )}
     </div>

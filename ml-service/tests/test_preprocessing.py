@@ -52,6 +52,14 @@ def test_tokenize():
     assert "नेपाल" in toks and "देश" in toks
 
 
+def test_tokenize_excludes_danda_and_punctuation():
+    # Regression: danda (।) / double danda (॥) must NOT become word tokens, else the
+    # spell-checker flags punctuation as a misspelling.
+    toks = tokenize(clean("म घर जान्छु। ऊ पनि आउँछ॥"))
+    assert "।" not in toks and "॥" not in toks
+    assert "जान्छु" in toks and "आउँछ" in toks
+
+
 def test_preprocess_for_baseline_removes_stopwords():
     out = preprocess_for_baseline("देश र समाज राम्रो छ")
     assert "देश" in out and "राम्रो" in out

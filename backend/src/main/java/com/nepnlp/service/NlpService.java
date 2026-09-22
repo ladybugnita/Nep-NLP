@@ -2,11 +2,14 @@ package com.nepnlp.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nepnlp.client.MlServiceClient;
+import com.nepnlp.dto.AnalysisResponse;
 import com.nepnlp.dto.ClassificationResponse;
 import com.nepnlp.dto.FeedbackRequest;
+import com.nepnlp.dto.SentimentExplainResponse;
 import com.nepnlp.dto.SpellCheckResponse;
 import com.nepnlp.dto.TranslationRequest;
 import com.nepnlp.dto.TranslationResponse;
+import com.nepnlp.dto.TransliterationResponse;
 import com.nepnlp.model.AnalysisRecord;
 import com.nepnlp.repository.AnalysisRecordRepository;
 import java.util.List;
@@ -31,16 +34,17 @@ public class NlpService {
         this.mapper = mapper;
     }
 
-    public ClassificationResponse news(String text) {
+    public AnalysisResponse news(String text) {
         ClassificationResponse res = ml.classifyNews(text);
-        save("news", text, res, res.model());
-        return res;
+        String id = save("news", text, res, res.model());
+        return new AnalysisResponse(res.label(), res.confidence(), res.scores(), res.model(), id, null);
     }
 
-    public ClassificationResponse sentiment(String text) {
-        ClassificationResponse res = ml.analyzeSentiment(text);
-        save("sentiment", text, res, res.model());
-        return res;
+    public AnalysisResponse sentiment(String text) {
+        SentimentExplainResponse res = ml.explainSentiment(text);
+        String id = save("sentiment", text, res, res.model());
+        return new AnalysisResponse(res.label(), res.confidence(), res.scores(), res.model(),
+                id, res.highlights());
     }
 
     public SpellCheckResponse spellcheck(String text) {
@@ -53,6 +57,10 @@ public class NlpService {
         TranslationResponse res = ml.translate(req);
         save("translation", req.text(), res, res.model());
         return res;
+    }
+
+    public TransliterationResponse transliterate(String text) {
+        return ml.transliterate(text);  // stateless helper; nothing to persist
     }
 
     public Map<String, Object> mlInfo() {
@@ -74,13 +82,15 @@ public class NlpService {
         return repo.save(rec);
     }
 
+    /** Persist best-effort; returns the new record id, or null if persistence failed. */
     @SuppressWarnings("unchecked")
-    private void save(String tool, String input, Object result, String tier) {
+    private String save(String tool, String input, Object result, String tier) {
         try {
             Map<String, Object> resultMap = mapper.convertValue(result, Map.class);
-            repo.save(new AnalysisRecord(tool, input, resultMap, tier));
+            return repo.save(new AnalysisRecord(tool, input, resultMap, tier)).getId();
         } catch (Exception e) {
             log.warn("Could not persist {} analysis: {}", tool, e.getMessage());
+            return null;
         }
     }
 }

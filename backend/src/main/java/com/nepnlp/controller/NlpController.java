@@ -1,11 +1,12 @@
 package com.nepnlp.controller;
 
-import com.nepnlp.dto.ClassificationResponse;
+import com.nepnlp.dto.AnalysisResponse;
 import com.nepnlp.dto.FeedbackRequest;
 import com.nepnlp.dto.SpellCheckResponse;
 import com.nepnlp.dto.TextRequest;
 import com.nepnlp.dto.TranslationRequest;
 import com.nepnlp.dto.TranslationResponse;
+import com.nepnlp.dto.TransliterationResponse;
 import com.nepnlp.model.AnalysisRecord;
 import com.nepnlp.service.NlpService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,13 +34,13 @@ public class NlpController {
 
     @Operation(summary = "Classify a Nepali news article/headline by topic")
     @PostMapping("/news")
-    public ClassificationResponse news(@Valid @RequestBody TextRequest req) {
+    public AnalysisResponse news(@Valid @RequestBody TextRequest req) {
         return service.news(req.text());
     }
 
-    @Operation(summary = "Detect sentiment (positive / negative / neutral) of Nepali text")
+    @Operation(summary = "Detect sentiment of Nepali text, with polarity-word highlights")
     @PostMapping("/sentiment")
-    public ClassificationResponse sentiment(@Valid @RequestBody TextRequest req) {
+    public AnalysisResponse sentiment(@Valid @RequestBody TextRequest req) {
         return service.sentiment(req.text());
     }
 
@@ -53,6 +54,12 @@ public class NlpController {
     @PostMapping("/translate")
     public TranslationResponse translate(@Valid @RequestBody TranslationRequest req) {
         return service.translate(req);
+    }
+
+    @Operation(summary = "Transliterate Romanized Nepali to Devanagari (e.g. 'timro naam')")
+    @PostMapping("/transliterate")
+    public TransliterationResponse transliterate(@Valid @RequestBody TextRequest req) {
+        return service.transliterate(req.text());
     }
 
     @Operation(summary = "Which ML tools are loaded and at which tier")

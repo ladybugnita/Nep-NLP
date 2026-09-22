@@ -42,6 +42,13 @@ class TranslationResponse(BaseModel):
     available: bool = True
     detail: str | None = None
 
+
+# --- transliteration (Romanized Nepali -> Devanagari) --------------------------------
+
+class TransliterationResponse(BaseModel):
+    input: str
+    output: str
+
 class ToolStatus(BaseModel):
     name: str
     tier: str          

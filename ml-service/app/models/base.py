@@ -35,25 +35,25 @@ class BaselineTextClassifier:
         # Imported here so the module loads even before sklearn is installed.
         from sklearn.feature_extraction.text import TfidfVectorizer
         from sklearn.linear_model import LogisticRegression
-        from sklearn.pipeline import Pipeline
+        from sklearn.pipeline import FeatureUnion, Pipeline
 
-        # Word 1–2 grams on preprocessed (stopword-removed) text. For production, adding
-        # char_wb (3,5) n-grams noticeably helps morphologically rich Devanagari.
+        # Two complementary views of the text, concatenated:
+        #  - WORD 1–2 grams on stopword-removed text  -> captures topical vocabulary
+        #  - CHAR_WB 2–5 grams on cleaned text         -> captures Nepali morphology
+        #    (suffixes/inflections), robust to spelling variation. Char n-grams give a
+        #    large accuracy boost for morphologically rich Devanagari.
+        word_vec = TfidfVectorizer(
+            preprocessor=preprocess_for_baseline, analyzer="word",
+            ngram_range=(1, 2), min_df=1, sublinear_tf=True,
+        )
+        char_vec = TfidfVectorizer(
+            preprocessor=clean, analyzer="char_wb",
+            ngram_range=(2, 5), min_df=1, sublinear_tf=True,
+        )
         self.pipeline = Pipeline(
             [
-                (
-                    "tfidf",
-                    TfidfVectorizer(
-                        preprocessor=preprocess_for_baseline,
-                        ngram_range=(1, 2),
-                        min_df=1,
-                        sublinear_tf=True,
-                    ),
-                ),
-                (
-                    "clf",
-                    LogisticRegression(max_iter=1000, C=4.0, class_weight="balanced"),
-                ),
+                ("features", FeatureUnion([("word", word_vec), ("char", char_vec)])),
+                ("clf", LogisticRegression(max_iter=2000, C=8.0, class_weight="balanced")),
             ]
         )
         self.pipeline.fit(texts, labels)

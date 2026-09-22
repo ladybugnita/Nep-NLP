@@ -13,6 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from . import config, registry
 from .models.sentiment import highlight_polarity_words
+from .transliterate import transliterate as romanize_to_devanagari
 from .schemas import (
     ClassificationResponse,
     InfoResponse,
@@ -21,6 +22,7 @@ from .schemas import (
     ToolStatus,
     TranslationRequest,
     TranslationResponse,
+    TransliterationResponse,
 )
 
 
@@ -93,3 +95,9 @@ def spellcheck(req: TextRequest) -> SpellCheckResponse:
 @app.post("/translate", response_model=TranslationResponse)
 def translate(req: TranslationRequest) -> TranslationResponse:
     return registry.get_translation().translate(req.text, req.source, req.target)
+
+
+@app.post("/transliterate", response_model=TransliterationResponse)
+def transliterate_ep(req: TextRequest) -> TransliterationResponse:
+    """Romanized Nepali -> Devanagari (e.g. 'timro naam' -> 'तिम्रो नाम')."""
+    return TransliterationResponse(input=req.text, output=romanize_to_devanagari(req.text))

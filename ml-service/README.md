@@ -68,6 +68,55 @@ python -m training.train_classifier --task news --model transformer \
 The script prints accuracy, per-class precision/recall/F1, and a confusion matrix on a
 held-out test set, then saves the model where the service will auto-load it.
 
+## Collect real data (scraper) + fine-tune
+
+Bootstrap a **real** Nepali news dataset from public RSS feeds, labelled by topic via
+distant supervision (keyword/category voting), honouring robots.txt + crawl-delay:
+
+```bash
+python scripts/scrape_news.py --pages 20 --out data/raw/news_scraped.csv
+```
+
+Then train. Two tiers, measured honestly on a held-out split of the **real** data:
+
+| Model | Data | Held-out accuracy |
+|-------|------|-------------------|
+| TF-IDF + char n-grams + LogReg (baseline) | ~650 real articles | **~85%** |
+| baseline | real + generated seed | **~86%** |
+| distilbert-base-nepali (fine-tuned) | real + seed | *see training log* |
+
+Fine-tune a transformer (works on CPU; faster on Colab GPU):
+
+```bash
+python -m training.train_classifier --task news --model transformer \
+    --data data/news_train_full.csv --base-model Sakonii/distilbert-base-nepali --epochs 3
+```
+
+> **Honest note on accuracy:** distant-supervision labels are ~85–90% precise, which *caps*
+> model accuracy around there. Reaching a trustworthy **95%** needs hand-verified labels and
+> more balanced data (esp. tech/entertainment) — that hand-labelling is the real
+> standout work, and the pipeline here is built to reach it once you add clean labels.
+
+### Gold test set — the credible accuracy number
+
+Distant-supervision labels are noisy, so measuring on them is circular. Build a small
+**hand-labelled gold set** sampled from *all* articles (including the hard ones the keyword
+rule skips) and evaluate on that:
+
+```bash
+# 1. dump an unbiased pool of ALL fetched articles
+python scripts/scrape_news.py --pages 20 --dump-all data/gold/pool.csv
+# 2. sample N and generate the labelling tool
+python scripts/make_gold_sample.py --pool data/gold/pool.csv --n 300
+# 3. open tools/label_news.html in your browser; label with keys 1–5 (o=other, s=skip),
+#    then "Download gold.csv" and save it to data/gold/gold.csv
+# 4. the credible number, for BOTH tiers:
+python scripts/eval_gold.py --gold data/gold/gold.csv
+```
+
+Report that gold accuracy in your write-up / model card — it's the honest, defensible figure
+(and reporting inter-annotator agreement if a friend labels an overlap is even stronger).
+
 ## Tests
 
 ```bash

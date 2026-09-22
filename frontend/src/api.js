@@ -23,4 +23,7 @@ export const api = {
   spellcheck: (text) => post('/spellcheck', { text }),
   translate: (text, source, target) => post('/translate', { text, source, target }),
   mlInfo: () => get('/ml-info'),
+  feedback: (recordId, correctLabel, modelWasCorrect) =>
+    post('/feedback', { recordId, correctLabel, modelWasCorrect }),
+  transliterate: (text) => post('/transliterate', { text }),
 }
