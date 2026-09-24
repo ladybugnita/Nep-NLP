@@ -3,9 +3,8 @@
 > An open toolkit that brings four everyday NLP tools to Nepali, an under-served language:
 > **news classification · sentiment analysis · spell-checking · machine translation**.
 >
-> Built as a full-stack, polyglot system  **React** frontend, **Java / Spring Boot** API,
-> **MongoDB** storage, and a **Python / Hugging Face** ML service with models fine-tuned
-> on **Google Colab** and an openly published, self-collected dataset.
+> Built as a full-stack, polyglot system: **React** frontend, **Java / Spring Boot** API,
+> **MongoDB** storage, and a **Python / Hugging Face** ML service.
 
 <p align="center">
   <em>भाषा सबैका लागि : language technology for everyone.</em>
@@ -23,10 +22,10 @@ closing that gap.
 
 | Tool | What it does | Input → Output |
 |------|--------------|----------------|
-| 📰 **News classifier** | Tags a Nepali article by topic | text → `राजनीति / खेलकुद / प्रविधि / …` |
-| 😊 **Sentiment analyzer** | Detects opinion polarity | text → `सकारात्मक / नकारात्मक / तटस्थ` |
-| ✍️ **Spell-checker** | Flags & fixes misspellings | text → per-word suggestions |
-| 🌐 **Translator** | Nepali ↔ English | text → translated text |
+| **News classifier** | Tags a Nepali article by topic | text → `राजनीति / खेलकुद / प्रविधि / …` |
+| **Sentiment analyzer** | Detects opinion polarity | text → `सकारात्मक / नकारात्मक / तटस्थ` |
+| **Spell-checker** | Flags & fixes misspellings | text → per-word suggestions |
+| **Translator** | Nepali ↔ English | text → translated text |
 
 Each tool ships with a **fast baseline** (works immediately, no GPU) and a path to a
 **fine-tuned transformer** (trained on Colab) for higher accuracy.
@@ -35,14 +34,14 @@ Each tool ships with a **fast baseline** (works immediately, no GPU) and a path 
 
 ```
   ┌───────────┐      ┌────────────────────┐      ┌──────────────┐
-  │  React    │ ───► │  Java / Spring Boot │ ───► │   MongoDB    │
-  │ (frontend)│ ◄─── │   (API + logic)     │ ◄─── │  (storage)   │
+  │  React    │ ───► │  Java / Spring Boot│ ───► │   MongoDB    │
+  │ (frontend)│ ◄─── │   (API + logic)    │ ◄─── │  (storage)   │
   └───────────┘      └─────────┬──────────┘      └──────────────┘
                                │ REST
                                ▼
                      ┌────────────────────┐
                      │  Python / FastAPI  │  ◄── Hugging Face models
-                     │    (ML service)    │      (fine-tuned on Colab)
+                     │    (ML service)    │      
                      └────────────────────┘
 ```
 
@@ -70,7 +69,6 @@ Then open:
 ├── ml-service/      Python + FastAPI + Hugging Face  (the NLP substance)
 ├── backend/         Java + Spring Boot  (REST API, auth, MongoDB orchestration)
 ├── frontend/        React + Vite  (the demo UI)
-├── docs/            Architecture, standout strategy, roadmap, dataset datasheet
 ├── docker-compose.yml
 └── README.md
 ```
@@ -82,5 +80,11 @@ Then open:
 ## License
 
 - **Code:** MIT (see `LICENSE`)
-- **Dataset:** CC BY 4.0 (attribution).
+- **Sample data:** a small sample collected from publicly available Nepali sources, included for educational and research purposes only.
+  
+## Author
+
+**Nita Dangol**
+
+[GitHub](https://github.com/ladybugnita) · [LinkedIn](https://linkedin.com/in/nitadangol) · [Portfolio](https://nitadangol.com.np)
 
