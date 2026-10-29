@@ -1,24 +1,22 @@
-/* ------------------------------------------------------------------ design tokens */
 :root {
-  /* Nepali flag palette — crimson + blue on clean paper. Crimson leads, blue supports. */
   --bg: #f5f4f1;
   --card: #ffffff;
   --ink: #1b1b21;
   --muted: #71727e;
   --line: #e6e5e0;
   --track: #eceae5;
-  --crimson: #c8102e;         /* Nepal flag crimson */
-  --blue: #003893;            /* Nepal flag blue */
+  --crimson: #c8102e;         
+  --blue: #003893;            
   --accent: var(--crimson);
   --accent-2: var(--blue);
   --accent-hover: #a50d26;
   --accent-weak: rgba(200, 16, 46, 0.09);
   --blue-weak: rgba(0, 56, 147, 0.10);
-  --pos: #1f7a44;             /* green kept for positive sentiment (semantic, not brand) */
+  --pos: #1f7a44;             
   --pos-weak: rgba(31, 122, 68, 0.12);
-  --neg: #c8102e;             /* negative = flag crimson */
+  --neg: #c8102e;             
   --neg-weak: rgba(200, 16, 46, 0.09);
-  --neu: #5a6b8c;             /* neutral leans to flag blue */
+  --neu: #5a6b8c;             
   --shadow: 0 1px 2px rgba(20, 20, 35, 0.04), 0 16px 40px -18px rgba(20, 20, 45, 0.14);
   --radius: 16px;
 
@@ -58,7 +56,6 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
 
 .app { max-width: 760px; margin: 0 auto; padding: 40px 22px 72px; position: relative; }
 
-/* ------------------------------------------------------------------ header */
 .hero { text-align: center; margin: 4px 0 34px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; }
 .flag { width: 27px; height: auto; display: block; filter: drop-shadow(0 1px 1px rgba(0,0,0,.12)); }
@@ -78,7 +75,6 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
 }
 .tagline-en { color: var(--muted); margin: 0; font-size: 13px; letter-spacing: 0.03em; }
 
-/* ------------------------------------------------------------------ tabs (minimal underline) */
 .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); margin-bottom: 30px; }
 .tab {
   flex: 1; background: none; border: none; border-bottom: 2px solid transparent;
@@ -86,13 +82,12 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
   display: flex; flex-direction: column; align-items: center; gap: 2px;
   transition: color 0.18s ease, border-color 0.18s ease;
 }
-.tab-icon { display: none; }                 /* drop the emoji for a cleaner look */
+.tab-icon { display: none; }                
 .tab-label { font-size: 14px; font-weight: 600; letter-spacing: 0.01em; }
 .tab-ne { font-family: var(--font-deva); font-size: 12px; opacity: 0.85; }
 .tab:hover { color: var(--ink); }
 .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* ------------------------------------------------------------------ card + input */
 .card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 30px; box-shadow: var(--shadow);
@@ -132,7 +127,6 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
 .run:disabled { opacity: 0.45; cursor: not-allowed; }
 .run:not(:disabled):hover { background: var(--accent-hover); }
 
-/* secondary "Romanize" button — flag blue, to complement the crimson Run button */
 .romanize {
   background: transparent; color: var(--accent-2); border: 1px solid var(--accent-2);
   border-radius: 11px; padding: 11px 16px; font-size: 13.5px; font-weight: 600;
@@ -143,7 +137,6 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
 
 .error { color: var(--neg); font-size: 14px; background: var(--neg-weak); padding: 10px 14px; border-radius: 10px; }
 
-/* ------------------------------------------------------------------ results */
 .result { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--line); }
 .headline { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 .big-label { font-family: var(--font-display); font-size: 28px; font-weight: 500; letter-spacing: -0.01em; }
@@ -161,7 +154,6 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
 .bar-fill { height: 100%; background: var(--accent); border-radius: 999px; transition: width 0.5s cubic-bezier(.2,.7,.2,1); }
 .bar-pct { font-size: 12px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
 
-/* sentiment */
 .sentiment-card {
   display: flex; align-items: center; gap: 15px; padding: 16px 18px; border-radius: 13px;
   margin-bottom: 18px; border: 1px solid var(--line);
@@ -205,7 +197,6 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
 .notice strong { color: var(--ink); }
 .sub { color: var(--muted); font-size: 13px; }
 
-/* ------------------------------------------------------------------ footer */
 .footer { margin-top: 30px; text-align: center; }
 .status { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 12px; }
 .pill { font-size: 12px; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
@@ -213,7 +204,6 @@ body { margin: 0; background: var(--bg); color: var(--ink); -webkit-font-smoothi
 .pill.down { color: var(--neg); border-color: var(--neg-weak); }
 .fine { color: var(--muted); font-size: 12px; max-width: 540px; margin: 0 auto; line-height: 1.7; }
 
-/* ------------------------------------------------------------------ theme toggle */
 .theme-toggle {
   position: absolute; top: 22px; right: 0; background: var(--card); border: 1px solid var(--line);
   color: var(--ink); width: 40px; height: 40px; border-radius: 999px; cursor: pointer; font-size: 16px;

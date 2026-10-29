@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import { api } from '../api'
 
-// Shared input area: textarea + example chips + run button. Also offers a one-click
-// "Romanize" that converts Romanized Nepali (e.g. "timro naam") in the box to Devanagari,
-// so every tool becomes usable without a Nepali keyboard.
 export default function InputPanel({
   value,
   onChange,
@@ -32,7 +29,6 @@ export default function InputPanel({
       const r = await api.transliterate(value)
       if (r?.output) onChange(r.output)
     } catch {
-      /* leave the text as-is on failure */
     } finally {
       setRomanizing(false)
     }

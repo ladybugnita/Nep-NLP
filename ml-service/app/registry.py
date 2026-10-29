@@ -1,8 +1,3 @@
-"""Lazy singletons for the loaded models.
-
-Lightweight tools (news, sentiment, spell-check baselines) are loaded eagerly at startup so
-the first request is fast. Translation is loaded lazily since it may pull a large model.
-"""
 
 from __future__ import annotations
 

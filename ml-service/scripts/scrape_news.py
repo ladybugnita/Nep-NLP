@@ -1,26 +1,3 @@
-"""Collect REAL Nepali news via public RSS feeds, labelled by topic (distant supervision).
-
-Approach
---------
-Nepali news portals publish RSS feeds whose items carry <category> tags. We don't trust a
-single messy tag; instead we score each article's (title + categories + summary) against a
-keyword lexicon for our five topics and keep it only when ONE topic clearly wins. Ambiguous
-items are skipped -> higher label precision (what a classifier needs).
-
-This is "distant supervision": labels are derived from metadata instead of hand-annotation.
-It is a legitimate, citable way to bootstrap a real dataset (document it in the datasheet),
-and a great complement to a small hand-labelled gold set.
-
-Etiquette
----------
-* Only public RSS feeds are fetched (never full-article scraping here).
-* robots.txt is honoured; requests are rate-limited; a descriptive User-Agent is sent.
-* Store only title + short summary + source URL, not full copyrighted article bodies.
-
-Usage
------
-    python scripts/scrape_news.py --pages 15 --out data/raw/news_scraped.csv
-"""
 
 from __future__ import annotations
 
@@ -37,14 +14,11 @@ from urllib.parse import urlparse
 
 UA = "NepNLP-research/0.1 (+student NLP project; contact via repo)"
 
-# Public RSS feeds. WordPress-style feeds accept ?paged=N for more history.
 SOURCES = [
-    # max_pages caps how many pages we pull; sites with a big crawl-delay get fewer.
     {"name": "onlinekhabar", "feed": "https://www.onlinekhabar.com/feed", "paged": True, "max_pages": 20},
     {"name": "ratopati", "feed": "https://www.ratopati.com/feed", "paged": True, "max_pages": 1},
 ]
 
-# Topic lexicon (Devanagari). Keyword hit in title/category/summary -> vote for that label.
 LEXICON = {
     "राजनीति": ["सरकार", "मन्त्री", "प्रधानमन्त्री", "संसद", "निर्वाचन", "दल", "राष्ट्रपति",
                  "सभा", "अध्यादेश", "गठबन्धन", "राजनीति", "सांसद", "मन्त्रिपरिषद", "विधेयक",
@@ -77,7 +51,7 @@ def robots_check(feed_url: str) -> tuple[bool, float]:
     rp = urllib.robotparser.RobotFileParser()
     txt = fetch(robots, timeout=15)
     if txt is None:
-        return True, 0.0  # robots.txt unreachable -> allowed for a public feed
+        return True, 0.0 
     rp.parse(txt.splitlines())
     allowed = rp.can_fetch(UA, feed_url)
     try:
@@ -111,28 +85,22 @@ def parse_items(xml_text: str):
 
 
 def label_for(title: str, summary: str, cats: list[str]) -> str | None:
-    """Vote by keyword hits and return a label only when one topic clearly wins.
-
-    We score the TITLE and the CATEGORY tags (the reliable signals) and ignore the summary
-    for labelling — summary-only matches were the main source of wrong labels (e.g. an
-    accident story that merely mentions a price). Requiring a clear margin raises precision,
-    which is what a classifier needs, at the cost of some recall.
-    """
+    
     cat_hay = " ".join(cats)
     scores = {label: 0 for label in LEXICON}
     for label, kws in LEXICON.items():
         for kw in kws:
             if kw in cat_hay:
-                scores[label] += 3          # category tag = strongest signal
+                scores[label] += 3          
             if kw in title:
-                scores[label] += 2          # title hit = strong
+                scores[label] += 2          
             if kw in summary:
-                scores[label] += 1          # summary hit = weak (supporting only)
+                scores[label] += 1          
     ranked = sorted(scores.values(), reverse=True)
     top = ranked[0]
-    if top < 2:                              # need a title or category hit (not summary alone)
+    if top < 2:                              
         return None
-    if len(ranked) > 1 and ranked[1] >= top:  # require a strict winner
+    if len(ranked) > 1 and ranked[1] >= top:  
         return None
     return max(scores, key=scores.get)
 
@@ -152,8 +120,8 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
 
     seen_titles: set[str] = set()
-    rows = []  # (text, label, source, title)
-    pool = []  # (id, text, source) — ALL articles, for gold sampling
+    rows = []  
+    pool = []  
     per_label = {label: 0 for label in LEXICON}
 
     for src in SOURCES:
@@ -178,10 +146,8 @@ def main():
                 seen_titles.add(title)
                 text = (title + ". " + summary).strip()
                 text = re.sub(r"\s+", " ", text)
-                # Pool = every article (used to sample an unbiased gold test set).
                 aid = hashlib.md5(title.encode("utf-8")).hexdigest()[:10]
                 pool.append((aid, text, src["name"]))
-                # Labelled set = only clearly-topical articles (distant supervision).
                 label = label_for(title, summary, cats)
                 if label:
                     rows.append((text, label, src["name"], title))

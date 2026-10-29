@@ -1,4 +1,3 @@
-"""Pydantic request/response models."""
 
 from __future__ import annotations
 
@@ -42,8 +41,6 @@ class TranslationResponse(BaseModel):
     available: bool = True
     detail: str | None = None
 
-
-# --- transliteration (Romanized Nepali -> Devanagari) --------------------------------
 
 class TransliterationResponse(BaseModel):
     input: str

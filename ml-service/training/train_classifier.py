@@ -1,29 +1,3 @@
-"""Train a NepNLP text classifier (news or sentiment).
-
-Supports two model types:
-
-  * ``baseline``     — TF-IDF + Logistic Regression (scikit-learn). Fast, CPU-only.
-  * ``transformer``  — fine-tune a multilingual/Nepali encoder with Hugging Face Trainer.
-
-The script always prints a proper evaluation (accuracy, per-class precision/recall/F1, and a
-confusion matrix) on a held-out test set — the rigor that makes results credible. Saved
-models go to ``models_store/<task>/`` where the running ML service auto-detects them.
-
-Examples
---------
-Baseline on the bundled sample data:
-    python -m training.train_classifier --task sentiment --model baseline
-
-Fine-tune a transformer (on Colab GPU) with your own dataset:
-    python -m training.train_classifier --task news --model transformer \\
-        --data data/news_full.csv --base-model xlm-roberta-base --epochs 4
-
-Good Nepali-friendly base checkpoints to try for --base-model:
-    xlm-roberta-base            (robust multilingual default)
-    google/muril-base-cased     (strong on South-Asian languages)
-    Sakonii/distilbert-base-nepali
-    NepBERTa/NepBERTa
-"""
 
 from __future__ import annotations
 
@@ -34,7 +8,6 @@ import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 
-# Make `app` importable whether run as a module or a script.
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
@@ -145,7 +118,6 @@ def train_transformer(task, texts, labels, base_model, epochs, batch_size,
         data_collator=DataCollatorWithPadding(tok),
         compute_metrics=compute_metrics,
     )
-    # transformers >=4.46 renamed `tokenizer` -> `processing_class`; support both.
     try:
         trainer = Trainer(**trainer_kwargs, processing_class=tok)
     except TypeError:

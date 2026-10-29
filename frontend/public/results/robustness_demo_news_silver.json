@@ -1,0 +1,1660 @@
+{
+  "task": "robustness",
+  "name": "demo_news_silver",
+  "n": 197,
+  "n_train": 456,
+  "labels": [
+    "अर्थतन्त्र",
+    "खेलकुद",
+    "प्रविधि",
+    "मनोरञ्जन",
+    "राजनीति"
+  ],
+  "warnings": [
+    "silver labels (keyword rules) — measures robustness of a keyword-learnable task, not sentiment",
+    "topic task, not the paper's sentiment task",
+    "code-mixing rate is limited by the small English substitution lexicon (eval/data/en_subs.tsv): see achieved_rate per condition",
+    "preliminary — small test set (n = 197)",
+    "spelling / preeti / romanize / code_mix perturbations are generated from resources nepnorm also uses — recovery on them is an optimistic upper bound; natural test data is the real test"
+  ],
+  "results": {
+    "tfidf-lr": {
+      "clean": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1519,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1479,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1479,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1479,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1475,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1477,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.152,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {},
+        "drop_without_nepnorm": 0.0,
+        "recovery": null,
+        "circular": false
+      },
+      "unicode": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1577,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1479,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1551,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1479,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1475,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.8293,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8293,
+            "macro_f1_ci95": [
+              0.7509,
+              0.8906
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1477,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9138
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.152,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {
+          "words": 47.7005,
+          "words_changed": 14.3553
+        },
+        "drop_without_nepnorm": 0.0,
+        "recovery": null,
+        "circular": false
+      },
+      "preeti": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.1399,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.1399,
+            "macro_f1_ci95": [
+              0.1283,
+              0.1506
+            ],
+            "accuracy": 0.5381,
+            "ece": 0.1931,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.0,
+              "खेलकुद": 0.0,
+              "प्रविधि": 0.0,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.6997
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1471,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1471,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.1537,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.1537,
+            "macro_f1_ci95": [
+              0.1219,
+              0.1872
+            ],
+            "accuracy": 0.4061,
+            "ece": 0.144,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.1194,
+              "खेलकुद": 0.0513,
+              "प्रविधि": 0.0,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.5976
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1471,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1471,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.151,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {
+          "unencodable_chars": 0
+        },
+        "drop_without_nepnorm": 0.6914,
+        "recovery": 1.0,
+        "circular": true
+      },
+      "spelling@0.1": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.831,
+            "macro_f1_std": 0.0004,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.154,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.8306,
+            "macro_f1_std": 0.001,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1527,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.155,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.155,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1547,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1548,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.8313,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8313,
+            "macro_f1_ci95": [
+              0.7528,
+              0.893
+            ],
+            "accuracy": 0.8782,
+            "ece": 0.1569,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {
+          "achieved_rate": 0.0921,
+          "words": 47.7005,
+          "words_changed": 4.3553
+        },
+        "drop_without_nepnorm": 0.0003,
+        "recovery": null,
+        "circular": true
+      },
+      "spelling@0.25": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.8035,
+            "macro_f1_std": 0.0141,
+            "macro_f1_seed0": 0.7846,
+            "macro_f1_ci95": [
+              0.6936,
+              0.8528
+            ],
+            "accuracy": 0.8613,
+            "ece": 0.1567,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8333,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.7273,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.8111,
+            "macro_f1_std": 0.0091,
+            "macro_f1_seed0": 0.8038,
+            "macro_f1_ci95": [
+              0.7153,
+              0.8706
+            ],
+            "accuracy": 0.868,
+            "ece": 0.1556,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8627,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.7273,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.8038,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8038,
+            "macro_f1_ci95": [
+              0.7153,
+              0.8706
+            ],
+            "accuracy": 0.868,
+            "ece": 0.1524,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8627,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.7273,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.8038,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8038,
+            "macro_f1_ci95": [
+              0.7153,
+              0.8706
+            ],
+            "accuracy": 0.868,
+            "ece": 0.1524,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8627,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.7273,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.8038,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8038,
+            "macro_f1_ci95": [
+              0.7153,
+              0.8706
+            ],
+            "accuracy": 0.868,
+            "ece": 0.1521,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8627,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.7273,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.8038,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8038,
+            "macro_f1_ci95": [
+              0.7153,
+              0.8706
+            ],
+            "accuracy": 0.868,
+            "ece": 0.1523,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8627,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.7273,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.9099
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.7846,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7846,
+            "macro_f1_ci95": [
+              0.6936,
+              0.8528
+            ],
+            "accuracy": 0.8528,
+            "ece": 0.1577,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8333,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.7273,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {
+          "achieved_rate": 0.2435,
+          "words": 47.7005,
+          "words_changed": 11.4162
+        },
+        "drop_without_nepnorm": 0.0278,
+        "recovery": 0.2734,
+        "circular": true
+      },
+      "spelling@0.5": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.8076,
+            "macro_f1_std": 0.0169,
+            "macro_f1_seed0": 0.8147,
+            "macro_f1_ci95": [
+              0.7345,
+              0.8769
+            ],
+            "accuracy": 0.8613,
+            "ece": 0.1774,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8085,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8983
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.8126,
+            "macro_f1_std": 0.0125,
+            "macro_f1_seed0": 0.8117,
+            "macro_f1_ci95": [
+              0.7313,
+              0.875
+            ],
+            "accuracy": 0.8663,
+            "ece": 0.1663,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8333,
+              "खेलकुद": 0.8814,
+              "प्रविधि": 0.7826,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.8117,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8117,
+            "macro_f1_ci95": [
+              0.7313,
+              0.875
+            ],
+            "accuracy": 0.8629,
+            "ece": 0.1679,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8333,
+              "खेलकुद": 0.8814,
+              "प्रविधि": 0.7826,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.8117,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8117,
+            "macro_f1_ci95": [
+              0.7313,
+              0.875
+            ],
+            "accuracy": 0.8629,
+            "ece": 0.1679,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8333,
+              "खेलकुद": 0.8814,
+              "प्रविधि": 0.7826,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.8117,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8117,
+            "macro_f1_ci95": [
+              0.7313,
+              0.875
+            ],
+            "accuracy": 0.8629,
+            "ece": 0.1674,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8333,
+              "खेलकुद": 0.8814,
+              "प्रविधि": 0.7826,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.8117,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8117,
+            "macro_f1_ci95": [
+              0.7313,
+              0.875
+            ],
+            "accuracy": 0.8629,
+            "ece": 0.1677,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8333,
+              "खेलकुद": 0.8814,
+              "प्रविधि": 0.7826,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.8147,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.8147,
+            "macro_f1_ci95": [
+              0.7345,
+              0.8769
+            ],
+            "accuracy": 0.8629,
+            "ece": 0.1747,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8085,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.8333,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8983
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {
+          "achieved_rate": 0.4756,
+          "words": 47.7005,
+          "words_changed": 22.6041
+        },
+        "drop_without_nepnorm": 0.0237,
+        "recovery": 0.211,
+        "circular": true
+      },
+      "romanized": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.2461,
+            "macro_f1_std": 0.0036,
+            "macro_f1_seed0": 0.2505,
+            "macro_f1_ci95": [
+              0.1876,
+              0.3175
+            ],
+            "accuracy": 0.5059,
+            "ece": 0.1891,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.1778,
+              "खेलकुद": 0.25,
+              "प्रविधि": 0.1429,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.682
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.7651,
+            "macro_f1_std": 0.0091,
+            "macro_f1_seed0": 0.7621,
+            "macro_f1_ci95": [
+              0.6675,
+              0.8339
+            ],
+            "accuracy": 0.8511,
+            "ece": 0.1541,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.5263,
+              "मनोरञ्जन": 0.6429,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.7621,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7621,
+            "macro_f1_ci95": [
+              0.6675,
+              0.8339
+            ],
+            "accuracy": 0.8528,
+            "ece": 0.1576,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.5263,
+              "मनोरञ्जन": 0.6429,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.7621,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7621,
+            "macro_f1_ci95": [
+              0.6675,
+              0.8339
+            ],
+            "accuracy": 0.8528,
+            "ece": 0.1576,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.5263,
+              "मनोरञ्जन": 0.6429,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.7776,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7776,
+            "macro_f1_ci95": [
+              0.6829,
+              0.8476
+            ],
+            "accuracy": 0.8579,
+            "ece": 0.162,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.6,
+              "मनोरञ्जन": 0.6429,
+              "राजनीति": 0.8983
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.2505,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.2505,
+            "macro_f1_ci95": [
+              0.1876,
+              0.3175
+            ],
+            "accuracy": 0.5127,
+            "ece": 0.196,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.1778,
+              "खेलकुद": 0.25,
+              "प्रविधि": 0.1429,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.682
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.7621,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7621,
+            "macro_f1_ci95": [
+              0.6675,
+              0.8339
+            ],
+            "accuracy": 0.8528,
+            "ece": 0.1583,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.88,
+              "खेलकुद": 0.8667,
+              "प्रविधि": 0.5263,
+              "मनोरञ्जन": 0.6429,
+              "राजनीति": 0.8945
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {},
+        "drop_without_nepnorm": 0.5852,
+        "recovery": 0.8869,
+        "circular": true
+      },
+      "codemix@0.05": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.2426,
+            "macro_f1_std": 0.0027,
+            "macro_f1_seed0": 0.2397,
+            "macro_f1_ci95": [
+              0.1787,
+              0.3082
+            ],
+            "accuracy": 0.5008,
+            "ece": 0.1843,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.1778,
+              "खेलकुद": 0.2034,
+              "प्रविधि": 0.1429,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.6744
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.7606,
+            "macro_f1_std": 0.0171,
+            "macro_f1_seed0": 0.7617,
+            "macro_f1_ci95": [
+              0.6636,
+              0.8307
+            ],
+            "accuracy": 0.8393,
+            "ece": 0.1863,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7917,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.6667,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8824
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.7617,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7617,
+            "macro_f1_ci95": [
+              0.6636,
+              0.8307
+            ],
+            "accuracy": 0.8376,
+            "ece": 0.1876,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7917,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.6667,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8824
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.7617,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7617,
+            "macro_f1_ci95": [
+              0.6636,
+              0.8307
+            ],
+            "accuracy": 0.8376,
+            "ece": 0.1876,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7917,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.6667,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8824
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.7558,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7558,
+            "macro_f1_ci95": [
+              0.6615,
+              0.8275
+            ],
+            "accuracy": 0.8325,
+            "ece": 0.1809,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.766,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.6667,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8787
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.2397,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.2397,
+            "macro_f1_ci95": [
+              0.1787,
+              0.3082
+            ],
+            "accuracy": 0.4975,
+            "ece": 0.1809,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.1778,
+              "खेलकुद": 0.2034,
+              "प्रविधि": 0.1429,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.6744
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.7617,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7617,
+            "macro_f1_ci95": [
+              0.6636,
+              0.8307
+            ],
+            "accuracy": 0.8376,
+            "ece": 0.188,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7917,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.6667,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8824
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {
+          "achieved_rate": 0.0334,
+          "english_words": 1.6751,
+          "target_rate": 0.05,
+          "words": 47.7005
+        },
+        "drop_without_nepnorm": 0.5887,
+        "recovery": 0.8799,
+        "circular": true
+      },
+      "codemix@max": {
+        "variants": {
+          "none": {
+            "macro_f1": 0.242,
+            "macro_f1_std": 0.0022,
+            "macro_f1_seed0": 0.2396,
+            "macro_f1_ci95": [
+              0.1792,
+              0.3092
+            ],
+            "accuracy": 0.5042,
+            "ece": 0.1876,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.1739,
+              "खेलकुद": 0.2069,
+              "प्रविधि": 0.1429,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.6744
+            },
+            "n_seeds": 3
+          },
+          "full": {
+            "macro_f1": 0.7097,
+            "macro_f1_std": 0.0193,
+            "macro_f1_seed0": 0.7079,
+            "macro_f1_ci95": [
+              0.6057,
+              0.787
+            ],
+            "accuracy": 0.8156,
+            "ece": 0.1842,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7843,
+              "खेलकुद": 0.8333,
+              "प्रविधि": 0.4444,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8619
+            },
+            "n_seeds": 3
+          },
+          "ablate:unicode": {
+            "macro_f1": 0.7079,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7079,
+            "macro_f1_ci95": [
+              0.6057,
+              0.787
+            ],
+            "accuracy": 0.8122,
+            "ece": 0.1781,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7843,
+              "खेलकुद": 0.8333,
+              "प्रविधि": 0.4444,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8619
+            },
+            "n_seeds": 1
+          },
+          "ablate:legacy": {
+            "macro_f1": 0.7079,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7079,
+            "macro_f1_ci95": [
+              0.6057,
+              0.787
+            ],
+            "accuracy": 0.8122,
+            "ece": 0.1781,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7843,
+              "खेलकुद": 0.8333,
+              "प्रविधि": 0.4444,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8619
+            },
+            "n_seeds": 1
+          },
+          "ablate:detect": {
+            "macro_f1": 0.7429,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7429,
+            "macro_f1_ci95": [
+              0.6501,
+              0.8217
+            ],
+            "accuracy": 0.8274,
+            "ece": 0.1928,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.8,
+              "खेलकुद": 0.8525,
+              "प्रविधि": 0.5263,
+              "मनोरञ्जन": 0.6667,
+              "राजनीति": 0.8692
+            },
+            "n_seeds": 1
+          },
+          "ablate:transliterate": {
+            "macro_f1": 0.2396,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.2396,
+            "macro_f1_ci95": [
+              0.1792,
+              0.3092
+            ],
+            "accuracy": 0.4975,
+            "ece": 0.1809,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.1739,
+              "खेलकुद": 0.2069,
+              "प्रविधि": 0.1429,
+              "मनोरञ्जन": 0.0,
+              "राजनीति": 0.6744
+            },
+            "n_seeds": 1
+          },
+          "ablate:spell": {
+            "macro_f1": 0.7079,
+            "macro_f1_std": 0.0,
+            "macro_f1_seed0": 0.7079,
+            "macro_f1_ci95": [
+              0.6057,
+              0.787
+            ],
+            "accuracy": 0.8122,
+            "ece": 0.1789,
+            "per_class_f1": {
+              "अर्थतन्त्र": 0.7843,
+              "खेलकुद": 0.8333,
+              "प्रविधि": 0.4444,
+              "मनोरञ्जन": 0.6154,
+              "राजनीति": 0.8619
+            },
+            "n_seeds": 1
+          }
+        },
+        "perturbation_meta": {
+          "achieved_rate": 0.0536,
+          "english_words": 2.6244,
+          "target_rate": 1.0,
+          "words": 47.7005
+        },
+        "drop_without_nepnorm": 0.5893,
+        "recovery": 0.7937,
+        "circular": true
+      }
+    }
+  },
+  "tests": [
+    {
+      "model": "tfidf-lr",
+      "condition": "unicode",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 0,
+      "c": 0,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "unicode",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 0,
+      "c": 0,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "preeti",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 67,
+      "c": 0,
+      "p": 1.3552527156068805e-20,
+      "p_holm": 1.7618285302889447e-19,
+      "significant_0.05": true
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "preeti",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 67,
+      "c": 0,
+      "p": 1.3552527156068805e-20,
+      "p_holm": 1.7618285302889447e-19,
+      "significant_0.05": true
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "spelling@0.1",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 0,
+      "c": 0,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "spelling@0.1",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 0,
+      "c": 0,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "spelling@0.25",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 3,
+      "c": 0,
+      "p": 0.25,
+      "p_holm": 1.0,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "spelling@0.25",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 5,
+      "c": 0,
+      "p": 0.0625,
+      "p_holm": 0.5,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "spelling@0.5",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 1,
+      "c": 1,
+      "p": 1.0,
+      "p_holm": 1.0,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "spelling@0.5",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 3,
+      "c": 0,
+      "p": 0.25,
+      "p_holm": 1.0,
+      "significant_0.05": false
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "romanized",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 67,
+      "c": 0,
+      "p": 1.3552527156068805e-20,
+      "p_holm": 1.7618285302889447e-19,
+      "significant_0.05": true
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "romanized",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 72,
+      "c": 0,
+      "p": 4.235164736271502e-22,
+      "p_holm": 5.929230630780102e-21,
+      "significant_0.05": true
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "codemix@0.05",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 68,
+      "c": 1,
+      "p": 2.371692252312041e-19,
+      "p_holm": 2.371692252312041e-18,
+      "significant_0.05": true
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "codemix@0.05",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 75,
+      "c": 0,
+      "p": 5.293955920339377e-23,
+      "p_holm": 8.470329472543003e-22,
+      "significant_0.05": true
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "codemix@max",
+      "comparison": "perturbed: nepnorm vs none",
+      "b": 65,
+      "c": 3,
+      "p": 3.5550311609441887e-16,
+      "p_holm": 3.19952804484977e-15,
+      "significant_0.05": true
+    },
+    {
+      "model": "tfidf-lr",
+      "condition": "codemix@max",
+      "comparison": "no nepnorm: clean vs perturbed",
+      "b": 75,
+      "c": 0,
+      "p": 5.293955920339377e-23,
+      "p_holm": 8.470329472543003e-22,
+      "significant_0.05": true
+    }
+  ],
+  "latency_full_pipeline_ms": {
+    "clean": {
+      "n": 197,
+      "p50_ms": 8.269,
+      "p95_ms": 19.293
+    },
+    "unicode": {
+      "n": 591,
+      "p50_ms": 1.161,
+      "p95_ms": 15.521
+    },
+    "preeti": {
+      "n": 197,
+      "p50_ms": 8.337,
+      "p95_ms": 20.397
+    },
+    "spelling@0.1": {
+      "n": 571,
+      "p50_ms": 4.042,
+      "p95_ms": 17.266
+    },
+    "spelling@0.25": {
+      "n": 591,
+      "p50_ms": 7.306,
+      "p95_ms": 19.594
+    },
+    "spelling@0.5": {
+      "n": 591,
+      "p50_ms": 8.928,
+      "p95_ms": 20.469
+    },
+    "romanized": {
+      "n": 591,
+      "p50_ms": 11.772,
+      "p95_ms": 22.592
+    },
+    "codemix@0.05": {
+      "n": 591,
+      "p50_ms": 11.762,
+      "p95_ms": 23.839
+    },
+    "codemix@max": {
+      "n": 591,
+      "p50_ms": 11.497,
+      "p95_ms": 22.842
+    }
+  },
+  "provenance": {
+    "git_commit": "4459054-dirty",
+    "dataset": {
+      "path": "data/news_train_full.csv",
+      "sha256": "a8e714dea000787215b805375af0882e6345f3e3b58dfd50e8725359d2328b4c",
+      "rows_used": 653,
+      "rows_excluded": 560,
+      "label_quality": "silver: keyword-rule distant supervision (scripts/scrape_news.py); est. ~85-90% precise, not hand-checked"
+    },
+    "split": {
+      "method": "group-aware stratified (near-duplicate clusters kept together)",
+      "seed": 42,
+      "duplicate_groups": 652
+    },
+    "config_sha256": "ba24263d0f0d18b39a8766b52b78f12b722a47910acb65acda25854ee8a6a33f",
+    "nepnorm_version": "0.1.0",
+    "python": "3.14.0",
+    "machine": "Windows-11-10.0.26200-SP0",
+    "perturbation_seeds": [
+      13,
+      42,
+      1234
+    ],
+    "run_at": "2026-09-27T14:51:18+00:00",
+    "data_file": "data/news_train_full.csv",
+    "data_sha256": "a8e714dea000787215b805375af0882e6345f3e3b58dfd50e8725359d2328b4c"
+  },
+  "config": {
+    "name": "demo_news_silver",
+    "description": "Preliminary run on what exists today: real scraped news headlines+ledes with keyword-rule (silver) topic labels. NOT a paper result.",
+    "dataset": {
+      "path": "data/news_train_full.csv",
+      "exclude_texts_from": [
+        "data/news_train.csv"
+      ],
+      "label_quality": "silver: keyword-rule distant supervision (scripts/scrape_news.py); est. ~85-90% precise, not hand-checked"
+    },
+    "split": {
+      "ratios": [
+        0.7,
+        0.0,
+        0.3
+      ],
+      "seed": 42,
+      "dedup_threshold": 0.8
+    },
+    "models": [
+      {
+        "type": "tfidf_baseline",
+        "name": "tfidf-lr"
+      }
+    ],
+    "conditions": [
+      {
+        "name": "clean"
+      },
+      {
+        "name": "unicode",
+        "perturbation": "unicode_noise",
+        "params": {
+          "rate": 0.3
+        }
+      },
+      {
+        "name": "preeti",
+        "perturbation": "preeti"
+      },
+      {
+        "name": "spelling@0.1",
+        "perturbation": "spelling",
+        "params": {
+          "rate": 0.1
+        }
+      },
+      {
+        "name": "spelling@0.25",
+        "perturbation": "spelling",
+        "params": {
+          "rate": 0.25
+        }
+      },
+      {
+        "name": "spelling@0.5",
+        "perturbation": "spelling",
+        "params": {
+          "rate": 0.5
+        }
+      },
+      {
+        "name": "romanized",
+        "perturbation": "romanize"
+      },
+      {
+        "name": "codemix@0.05",
+        "perturbation": "code_mix",
+        "params": {
+          "rate": 0.05
+        }
+      },
+      {
+        "name": "codemix@max",
+        "perturbation": "code_mix",
+        "params": {
+          "rate": 1.0
+        },
+        "note": "every word with an English entry in eval/data/en_subs.tsv is replaced; see achieved_rate"
+      }
+    ],
+    "normalization_variants": [
+      "none",
+      "full",
+      "ablate:unicode",
+      "ablate:legacy",
+      "ablate:detect",
+      "ablate:transliterate",
+      "ablate:spell"
+    ],
+    "perturbation_seeds": [
+      13,
+      42,
+      1234
+    ],
+    "ablation_seeds": 1,
+    "bootstrap": 1000,
+    "warnings": [
+      "silver labels (keyword rules) — measures robustness of a keyword-learnable task, not sentiment",
+      "topic task, not the paper's sentiment task",
+      "code-mixing rate is limited by the small English substitution lexicon (eval/data/en_subs.tsv): see achieved_rate per condition"
+    ]
+  },
+  "runtime_s": 134.8
+}

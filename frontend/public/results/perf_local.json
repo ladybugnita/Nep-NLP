@@ -1,0 +1,58 @@
+{
+  "cold_start_ms": 5463.3,
+  "first_analyze_ms": 27.23,
+  "endpoints": {
+    "/health": {
+      "n": 100,
+      "p50_ms": 3.42,
+      "p95_ms": 20.67,
+      "max_ms": 26.06
+    },
+    "/normalize": {
+      "n": 100,
+      "p50_ms": 6.72,
+      "p95_ms": 25.63,
+      "max_ms": 30.13
+    },
+    "/transliterate": {
+      "n": 100,
+      "p50_ms": 4.66,
+      "p95_ms": 23.95,
+      "max_ms": 29.61
+    },
+    "/spellcheck": {
+      "n": 100,
+      "p50_ms": 4.83,
+      "p95_ms": 24.45,
+      "max_ms": 29.49
+    },
+    "/sentiment": {
+      "n": 100,
+      "p50_ms": 17.2,
+      "p95_ms": 29.44,
+      "max_ms": 33.19
+    },
+    "/analyze": {
+      "n": 100,
+      "p50_ms": 20.67,
+      "p95_ms": 40.39,
+      "max_ms": 48.3
+    },
+    "/analyze (preeti)": {
+      "n": 100,
+      "p50_ms": 22.74,
+      "p95_ms": 35.78,
+      "max_ms": 46.57
+    }
+  },
+  "rss_mb": null,
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.0",
+    "cpu_count": 12,
+    "processor": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD"
+  },
+  "note": "sequential single-client requests over localhost; TF-IDF baseline tier",
+  "git_commit": "ad54c6a-dirty",
+  "run_at": "2026-09-27T13:14:38+00:00"
+}

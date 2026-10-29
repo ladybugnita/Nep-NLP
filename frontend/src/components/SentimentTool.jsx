@@ -51,7 +51,7 @@ export default function SentimentTool() {
           <ScoreBars scores={result.scores} />
           {result.highlights?.length > 0 && (
             <div className="highlights">
-              <span className="sub">Why: words that signalled sentiment —</span>
+              <span className="sub">Why: words that signalled sentiment </span>
               {result.highlights.map((h, i) => (
                 <span key={i} className={`hl ${h.polarity}`}>{h.word}</span>
               ))}

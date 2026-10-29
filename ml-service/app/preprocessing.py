@@ -1,17 +1,3 @@
-"""Nepali (Devanagari) text preprocessing.
-
-Cleaning Devanagari text well is one of the parts of this project that shows real
-language understanding rather than just calling a library. The same Nepali word can be
-represented by several different byte sequences (composed vs. decomposed forms, stray
-zero-width joiners, ASCII vs. Devanagari digits). If we don't normalize these, the model
-sees them as different tokens and accuracy suffers.
-
-References:
-- Unicode Devanagari block: U+0900–U+097F
-- Danda (।) U+0964, Double danda (॥) U+0965
-- Devanagari digits ० U+0966 … ९ U+096F
-- ZWJ U+200D, ZWNJ U+200C  (frequently inserted inconsistently by keyboards)
-"""
 
 from __future__ import annotations
 
@@ -36,8 +22,8 @@ _ASCII_DIGITS = "0123456789"
 _DEV_TO_ASCII = {ord(d): a for d, a in zip(_DEVANAGARI_DIGITS, _ASCII_DIGITS)}
 _ASCII_TO_DEV = {ord(a): d for d, a in zip(_DEVANAGARI_DIGITS, _ASCII_DIGITS)}
 
-DANDA = "।"          # ।
-DOUBLE_DANDA = "॥"   # ॥
+DANDA = "।"          
+DOUBLE_DANDA = "॥"   
 
 _URL_RE = re.compile(r"https?://\S+|www\.\S+")
 _EMAIL_RE = re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b")
@@ -49,10 +35,7 @@ _KEEP_RE = re.compile(rf"[^{_DEVANAGARI_BLOCK}A-Za-z0-9\s।॥?!.,;:%\-]")
 
 _SENT_SPLIT_RE = re.compile(r"[।॥?!]+|(?<!\d)\.(?!\d)")
 
-# Word tokens: Devanagari LETTERS/matras only (U+0900–U+0963, U+0971–U+097F) plus ASCII
-# letters/digits. Deliberately excludes danda (।), double danda (॥) and Devanagari digits
-# so punctuation is never treated as a word (which would be flagged as a misspelling).
-_DEV_LETTERS = r"ऀ-ॣॱ-ॿ"  # Devanagari letters/matras (no danda/digits)
+_DEV_LETTERS = r"ऀ-ॣॱ-ॿ" 
 _TOKEN_RE = re.compile(rf"[{_DEV_LETTERS}A-Za-z0-9]+")
 
 def normalize_unicode(text: str) -> str:
@@ -116,11 +99,7 @@ def remove_stopwords(tokens: list[str]) -> list[str]:
 
 
 def clean(text: str, *, digits_to_ascii: bool = True) -> str:
-    """Full cleaning pipeline used before feeding text to a model.
-
-    Order matters: strip markup/urls first, normalize unicode, remove zero-width chars,
-    then punctuation and whitespace.
-    """
+    
     if not text:
         return ""
     text = remove_html(text)
@@ -136,11 +115,7 @@ def clean(text: str, *, digits_to_ascii: bool = True) -> str:
 
 
 def preprocess_for_baseline(text: str, *, drop_stopwords: bool = True) -> str:
-    """Cleaning + tokenization + optional stopword removal, re-joined for TF-IDF.
-
-    Transformer models get `clean()` text directly (they have their own tokenizer and
-    benefit from stopwords); the classical baseline benefits from stopword removal.
-    """
+   
     cleaned = clean(text)
     tokens = tokenize(cleaned)
     if drop_stopwords:

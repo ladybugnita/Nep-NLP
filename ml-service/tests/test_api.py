@@ -1,7 +1,3 @@
-"""End-to-end API tests using FastAPI's TestClient (loads real baselines).
-
-Run:  pytest tests/test_api.py     or     python tests/test_api.py
-"""
 
 from __future__ import annotations
 
@@ -10,9 +6,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from fastapi.testclient import TestClient  # noqa: E402
+from fastapi.testclient import TestClient  
 
-from app.main import app  # noqa: E402
+from app.main import app  
 
 client = TestClient(app)
 

@@ -1,12 +1,3 @@
-"""Evaluate the news models on a HAND-LABELLED gold test set — the credible accuracy number.
-
-Reports accuracy, per-class precision/recall/F1 and a confusion matrix for BOTH tiers
-(classical baseline and, if present, the fine-tuned transformer) on gold labels you created
-with the labelling tool. Only the five known topics are scored; 'other'/'skip' rows are
-excluded (the 5-class model can't be right on those, so counting them would be unfair).
-
-    python scripts/eval_gold.py --gold data/gold/gold.csv
-"""
 
 from __future__ import annotations
 

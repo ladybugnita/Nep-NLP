@@ -1,16 +1,3 @@
-"""Sample an unbiased set of articles and generate a self-contained HTML labelling tool.
-
-Why: the distant-supervision labels are ~85-90% precise, so evaluating on them is circular.
-A small HAND-LABELLED gold test set — sampled from ALL articles (including the hard ones the
-keyword rule skipped) — gives a *credible* accuracy number to report.
-
-Pipeline:
-    1. python scripts/scrape_news.py --pages 20 --dump-all data/gold/pool.csv
-    2. python scripts/make_gold_sample.py --pool data/gold/pool.csv --n 300
-    3. open tools/label_news.html in your browser, label with keys 1-5 (o = other, s = skip),
-       then click "Download gold.csv" and save it to data/gold/gold.csv
-    4. python scripts/eval_gold.py --gold data/gold/gold.csv
-"""
 
 from __future__ import annotations
 

@@ -1,9 +1,3 @@
-"""A curated list of common Nepali stopwords (function words carrying little topic signal).
-
-This is intentionally hand-maintained and documented rather than pulled from an opaque
-package, so the choices are transparent and can be tuned for each task. Removing stopwords
-helps the classical TF-IDF baseline; transformer models generally keep them.
-"""
 
 NEPALI_STOPWORDS: frozenset[str] = frozenset(
     {

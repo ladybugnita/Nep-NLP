@@ -1,7 +1,3 @@
-"""Tests for Romanized Nepali -> Devanagari transliteration. Pure-Python, no ML deps.
-
-Run:  python tests/test_transliterate.py   (or pytest)
-"""
 
 from __future__ import annotations
 
@@ -18,19 +14,18 @@ def test_basic_phrase():
 
 
 def test_inherent_vowel_and_clusters():
-    assert transliterate("kasto") == "कस्तो"       # consonant cluster + inherent 'a'
-    assert transliterate("ramro") == "रम्रो"        # halant joins m+r
-    assert transliterate("laagyo") == "लाग्यो"      # gy stays a plain cluster (not ज्ञ)
+    assert transliterate("kasto") == "कस्तो"       
+    assert transliterate("ramro") == "रम्रो"        
+    assert transliterate("laagyo") == "लाग्यो"      
 
 
 def test_aspirates_and_long_vowels():
-    assert transliterate("khana") == "खन"           # single 'a' = inherent vowel
-    assert transliterate("khaanaa") == "खाना"       # doubled 'aa' = long vowel ा (the word "food")
+    assert transliterate("khana") == "खन"          
+    assert transliterate("khaanaa") == "खाना"      
     assert transliterate("chha") == "छ"
 
 
 def test_passthrough_non_latin():
-    # existing Devanagari, spaces, digits and punctuation are left untouched
     assert transliterate("म ठिक छु।") == "म ठिक छु।"
     assert transliterate("2024 saal") == "2024 साल"
 

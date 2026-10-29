@@ -1,8 +1,3 @@
-"""FastAPI entrypoint for the NepNLP ML service.
-
-Exposes a small, language-agnostic JSON API consumed by the Java backend (and usable
-directly from notebooks / curl). Interactive docs at /docs.
-"""
 
 from __future__ import annotations
 

@@ -1,7 +1,3 @@
-"""Tests for Nepali preprocessing. Pure-Python (no ML deps) so they run anywhere.
-
-Run with pytest, or directly:  python tests/test_preprocessing.py
-"""
 
 from __future__ import annotations
 
@@ -53,8 +49,7 @@ def test_tokenize():
 
 
 def test_tokenize_excludes_danda_and_punctuation():
-    # Regression: danda (।) / double danda (॥) must NOT become word tokens, else the
-    # spell-checker flags punctuation as a misspelling.
+    
     toks = tokenize(clean("म घर जान्छु। ऊ पनि आउँछ॥"))
     assert "।" not in toks and "॥" not in toks
     assert "जान्छु" in toks and "आउँछ" in toks

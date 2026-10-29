@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "file": "perf_local.json",
+      "kind": "perf",
+      "n": null,
+      "run_at": "2026-09-27T13:14:38+00:00"
+    },
+    {
+      "file": "robustness_demo_news_silver.json",
+      "kind": "robustness",
+      "n": 197,
+      "run_at": "2026-09-27T14:51:18+00:00"
+    }
+  ]
+}

@@ -17,13 +17,12 @@ stretch upgrade; this covers the common cases well and needs no download.
 
 from __future__ import annotations
 
-HALANT = "्"  # ्
+HALANT = "्"  
 
-# Consonants (Latin spelling -> base consonant, which carries the inherent 'a').
 CONSONANTS = {
     "chh": "छ", "kh": "ख", "gh": "घ", "ch": "च", "jh": "झ", "ph": "फ", "bh": "भ",
     "dh": "ध", "th": "थ", "sh": "श",
-    # NB: gy/ny/ng are intentionally NOT special conjuncts — in Romanized Nepali they are
+    # NB: gy/ny/ng are intentionally NOT special conjuncts.In Romanized Nepali they are
     # almost always plain clusters (laagyo -> लाग्यो, dhanyabaad -> धन्यबाद), handled by the
     # generic consonant+halant logic below.
     "k": "क", "g": "ग", "c": "च", "j": "ज", "t": "त", "d": "द", "n": "न", "p": "प",
