@@ -4,7 +4,6 @@ import java.time.Instant;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/** The final label for an item the annotators disagreed on (id = item id). */
 @Document(collection = "adjudications")
 public class Adjudication {
 

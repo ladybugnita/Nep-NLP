@@ -6,12 +6,6 @@ import org.springframework.boot.autoconfigure.mongo.MongoClientSettingsBuilderCu
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * MongoDB is used for best-effort persistence (analysis log, feedback, annotations), so an
- * unreachable database must not hang requests: fail fast instead of the driver's 30 s
- * default. Together with {@link MongoIndexInitializer} (indexes created after startup,
- * failures tolerated) the API starts and serves predictions even when Mongo is down.
- */
 @Configuration
 public class MongoConfig {
 

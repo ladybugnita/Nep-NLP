@@ -6,7 +6,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/** One annotator's label for one item (at most one per pair; re-labelling overwrites). */
 @Document(collection = "annotations")
 @CompoundIndex(name = "item_annotator", def = "{'itemId': 1, 'annotatorId': 1}", unique = true)
 public class Annotation {

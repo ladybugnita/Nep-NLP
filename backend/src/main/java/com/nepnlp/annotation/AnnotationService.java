@@ -25,15 +25,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-/**
- * Double annotation workflow: every annotator labels every item independently (they never
- * see each other's labels), disagreements go to an adjudicator, and the export feeds
- * ``scripts/iaa.py`` (Cohen's kappa) and ``scripts/export_dataset.py``.
- */
 @Service
 public class AnnotationService {
 
-    /** Excluded from agreement statistics and from the dataset unless adjudicated. */
     public static final String SKIP = "skip";
 
     private final AnnotationItemRepository items;
@@ -74,7 +68,6 @@ public class AnnotationService {
         return new ImportResult(imported, dup);
     }
 
-    /** The next item this annotator has not labelled yet (same shuffled order for everyone). */
     public NextItem next(String annotatorId) {
         List<String> done = labels.findByAnnotatorId(annotatorId).stream().map(Annotation::getItemId).toList();
         Query q = new Query(Criteria.where("_id").nin(done)).with(Sort.by("order", "_id")).limit(1);
@@ -96,7 +89,6 @@ public class AnnotationService {
         return LabelView.of(labels.save(a));
     }
 
-    /** Items with ≥ 2 non-skip labels that differ, not yet adjudicated. */
     public List<Disagreement> disagreements() {
         Map<String, List<Annotation>> byItem = labels.findAll().stream()
                 .collect(Collectors.groupingBy(Annotation::getItemId, TreeMap::new, Collectors.toList()));
@@ -151,7 +143,6 @@ public class AnnotationService {
         }
     }
 
-    /** Invalid label -> HTTP 400 (see AnnotationController). */
     public static class BadLabelException extends RuntimeException {
         public BadLabelException(String message) {
             super(message);

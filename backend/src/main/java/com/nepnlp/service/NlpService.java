@@ -60,7 +60,7 @@ public class NlpService {
     }
 
     public TransliterationResponse transliterate(String text) {
-        return ml.transliterate(text);  // stateless helper; nothing to persist
+        return ml.transliterate(text);  
     }
 
     public Map<String, Object> mlInfo() {
@@ -82,7 +82,6 @@ public class NlpService {
         return repo.save(rec);
     }
 
-    /** Persist best-effort; returns the new record id, or null if persistence failed. */
     @SuppressWarnings("unchecked")
     private String save(String tool, String input, Object result, String tier) {
         try {

@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/** A text to be labelled. {@code order} is a seeded random rank so every annotator sees the
- *  same shuffled order (not grouped by source), and {@code script} comes from nepnorm. */
 @Document(collection = "annotation_items")
 public class AnnotationItem {
 

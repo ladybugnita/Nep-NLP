@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-/** The whole double-annotation workflow against an embedded MongoDB (test data only). */
 @DataMongoTest
 class AnnotationServiceTest {
 

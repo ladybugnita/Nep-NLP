@@ -12,12 +12,10 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 import java.util.Map;
 
-/** Request/response records for /api/annotation (snake_case JSON, like the rest of the API). */
 public final class AnnotationDtos {
 
     private AnnotationDtos() {}
 
-    /** Pseudonymous IDs only (A1, A2, …) — never real names. */
     static final String ANNOTATOR_ID = "^[A-Za-z0-9_-]{1,32}$";
 
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)

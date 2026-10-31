@@ -14,11 +14,6 @@ import org.springframework.data.mongodb.core.mapping.MongoPersistentEntity;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 import org.springframework.stereotype.Component;
 
-/**
- * Creates the {@code @Indexed} indexes once the app is up. Replaces Spring Data's
- * {@code auto-index-creation}, which runs during context startup and makes the whole API
- * fail to start when MongoDB is unreachable. Here a failure is only logged.
- */
 @Component
 public class MongoIndexInitializer {
 
@@ -35,7 +30,6 @@ public class MongoIndexInitializer {
         ensureIndexes();
     }
 
-    /** @return true if every index was ensured, false if MongoDB was unavailable. */
     public boolean ensureIndexes() {
         MappingContext<? extends MongoPersistentEntity<?>, MongoPersistentProperty> ctx =
                 mongo.getConverter().getMappingContext();

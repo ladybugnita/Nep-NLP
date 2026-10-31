@@ -32,11 +32,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Annotation workflow API. Switch off with {@code NEPNLP_ANNOTATION_ENABLED=false} (the
- * endpoints then do not exist), and set {@code NEPNLP_ANNOTATION_TOKEN} before exposing it
- * anywhere public: every call must then send the same value in {@code X-Annotation-Token}.
- */
 @RestController
 @RequestMapping("/api/annotation")
 @Validated

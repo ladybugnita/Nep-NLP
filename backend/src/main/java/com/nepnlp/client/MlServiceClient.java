@@ -32,7 +32,6 @@ public class MlServiceClient {
                 .retrieve().body(ClassificationResponse.class);
     }
 
-    /** Sentiment + the polarity words that drove it (for the UI's "why?" view). */
     public SentimentExplainResponse explainSentiment(String text) {
         return client.post().uri("/sentiment/explain")
                 .body(new TextRequest(text))

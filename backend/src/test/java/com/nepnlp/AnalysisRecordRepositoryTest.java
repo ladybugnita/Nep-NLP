@@ -54,12 +54,10 @@ class AnalysisRecordRepositoryTest {
 
     @Test
     void feedbackUpdatesStoredRecord() {
-        // The feedback loop: a stored prediction gets a user correction written back to it.
         repo.deleteAll();
         AnalysisRecord saved = repo.save(new AnalysisRecord(
                 "news", "नेपालले खेल जित्यो।", Map.of("label", "राजनीति"), "baseline"));
 
-        // ml client is not used by addFeedback, so null is fine here.
         NlpService service = new NlpService(null, repo, new ObjectMapper());
         service.addFeedback(new FeedbackRequest(saved.getId(), "खेलकुद", false));
 
